@@ -1,4 +1,4 @@
-FROM balenalib/%%RESIN_MACHINE_NAME%%-Debian-Python:2.7.16-Jessie
+FROM balenalib/%%RESIN_MACHINE_NAME%%-ubuntu-python:2.7
 
 # Switch on systemd init system in container and set various other variables
 ENV INITSYSTEM="on" \
