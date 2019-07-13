@@ -1,4 +1,4 @@
-FROM resin/beaglebone-black-buildpack-deps:jessie
+FROM resin/%%RESIN_MACHINE_NAME%%:jessie
 
 # Switch on systemd init system in container and set various other variables
 ENV INITSYSTEM="on" \
