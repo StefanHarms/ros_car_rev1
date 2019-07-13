@@ -1,4 +1,4 @@
-FROM resin/%%RESIN_MACHINE_NAME%%-raspbian
+FROM balenalib/%%RESIN_MACHINE_NAME%%-jessie-python:2.7.16
 
 # Switch on systemd init system in container and set various other variables
 ENV INITSYSTEM="on" \
