@@ -1,4 +1,4 @@
-FROM resin/%%RESIN_MACHINE_NAME%%-python
+FROM resin/%%RESIN_MACHINE_NAME%%-raspbian
 
 # Switch on systemd init system in container and set various other variables
 ENV INITSYSTEM="on" \
@@ -15,6 +15,8 @@ RUN apt-get -qq update \
   && apt-get install -yq --no-install-recommends \
     python-dev python-pip \
     libpcl-dev libpcl1.7
+
+RUN git clone --recursive https://github.com/sunfounder/SunFounder_PiCar-S.git
 
 # Install ROS-related Python tools
 COPY ./requirements.txt .
