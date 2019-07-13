@@ -16,9 +16,9 @@ ENV INITSYSTEM="on" \
 #    python-dev python-pip \
 #    libpcl-dev libpcl1.7
 
-#RUN apt-get -qq update \
-#  && apt-get install -yq --no-install-recommends \
-#    python-dev python-pip git
+RUN apt-get -qq update \
+  && apt-get install -yq --no-install-recommends \
+    python-dev python-pip git
 
 
 RUN git clone --recursive https://github.com/sunfounder/SunFounder_PiCar-S.git
