@@ -86,4 +86,4 @@ RUN cat .dockerignore && ls -lah
 
 ENTRYPOINT ["./entrypoint.sh"]
 
-CMD ["roscore"]
+#CMD ["roscore"]

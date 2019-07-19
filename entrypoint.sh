@@ -8,4 +8,4 @@ set -e
 #export ROS_HOSTNAME="${HOSTNAME}"
 #echo -e "127.0.1.1\t${HOSTNAME}" >> /etc/hosts
 
-exec "$@"
+exec "/bin/bash"
