@@ -32,8 +32,8 @@ RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E
  
 RUN apt-get update -qq && \
   apt-get install -yq ros-kinetic-ros-base
-#RUN rosdep init \
-#    && rosdep update
+RUN rosdep init \
+    && rosdep update
 
 #RUN mkdir -p /usr/src/ros_${ROS_DISTRO}_ws/src ${ROS_INSTALL_DIR}
 
@@ -86,4 +86,4 @@ RUN cat .dockerignore && ls -lah
 
 ENTRYPOINT ["./entrypoint.sh"]
 
-#CMD ["roscore"]
+CMD ["roscore"]
