@@ -56,6 +56,6 @@ RUN /opt/ros/kinetic/setup.bash
 #                   catkin_make -DCMAKE_BUILD_TYPE=Release"
 
 # Debugging .dockerignore
-RUN cat .dockerignore && ls -lah
+#RUN cat .dockerignore && ls -lah
 
 ENTRYPOINT ["./entrypoint.sh"]
