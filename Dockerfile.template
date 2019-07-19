@@ -57,6 +57,8 @@ RUN rosdep init \
 
 WORKDIR /usr/src
 
+cd src && catkin_make  
+
 ## Clone, build, and install the Sweep C++ SDK
 #RUN git clone https://github.com/spmaniato/sweep-sdk.git \
 #      -b dashes_to_underscores \
@@ -86,4 +88,3 @@ RUN cat .dockerignore && ls -lah
 
 ENTRYPOINT ["./entrypoint.sh"]
 
-#CMD ["roscore"]
