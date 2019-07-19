@@ -24,13 +24,13 @@ RUN apt-get -qq update \
 RUN git clone --recursive https://github.com/sunfounder/SunFounder_PiCar-S.git
 
 # Install ROS-related Python tools
-#COPY ./requirements.txt .
-#RUN pip install -q -r requirements.txt
+COPY ./requirements.txt .
+RUN pip install -q -r requirements.txt
 
 RUN rosdep init \
     && rosdep update
 
-#RUN mkdir -p /usr/src/ros_${ROS_DISTRO}_ws/src ${ROS_INSTALL_DIR}
+RUN mkdir -p /usr/src/ros_${ROS_DISTRO}_ws/src ${ROS_INSTALL_DIR}
 
 #WORKDIR /usr/src/ros_${ROS_DISTRO}_ws
 
