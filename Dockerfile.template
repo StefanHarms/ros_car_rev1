@@ -63,6 +63,7 @@ WORKDIR /usr/src
 WORKDIR /usr/src/test
 COPY src src
 
+RUN echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
 RUN chmod +x /opt/ros/kinetic/setup.bash
 RUN /opt/ros/kinetic/setup.bash 
 RUN catkin_make  
