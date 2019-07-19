@@ -33,8 +33,8 @@ RUN apt-get -qq update --fix-missing\
 #RUN git clone --recursive https://github.com/sunfounder/SunFounder_PiCar-S.git
 
 # Install ROS-related Python tools
-#COPY ./requirements.txt .
-#RUN pip install -q -r requirements.txt
+COPY ./requirements.txt .
+RUN pip install -q -r requirements.txt
 
 RUN rosdep init \
     && rosdep update
