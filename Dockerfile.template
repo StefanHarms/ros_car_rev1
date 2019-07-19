@@ -24,7 +24,11 @@ RUN apt-get -qq update \
     git \
     python-dev \
     python-pip \
-    ros-kinetic-ros-base
+    ros-kinetic-ros-base \
+    python-rosinstall \
+    python-rosinstall-generator \
+    python-wstool \
+    build-essential
 
 #RUN git clone --recursive https://github.com/sunfounder/SunFounder_PiCar-S.git
 
