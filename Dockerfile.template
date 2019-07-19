@@ -66,7 +66,7 @@ COPY src src
 RUN echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
 RUN chmod +x /opt/ros/kinetic/setup.bash
 RUN /opt/ros/kinetic/setup.bash 
-RUN catkin_make  
+#RUN catkin_make  
 
 ## Clone, build, and install the Sweep C++ SDK
 #RUN git clone https://github.com/spmaniato/sweep-sdk.git \
