@@ -59,7 +59,7 @@ WORKDIR /usr/src
 WORKDIR /usr/src/test
 COPY src test
 
-RUN cd src && catkin_make  
+RUN cd test && catkin_make  
 
 ## Clone, build, and install the Sweep C++ SDK
 #RUN git clone https://github.com/spmaniato/sweep-sdk.git \
