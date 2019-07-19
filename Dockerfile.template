@@ -6,10 +6,10 @@ ENV INITSYSTEM="on" \
     PYTHONIOENCODING="UTF-8"
 
 # Variables for ROS distribution, configuration, and installation
-#ENV ROS_DISTRO="indigo" \
-#    ROS_CONFIG="ros_comm" \
-#    ROS_EXTRA_PACKAGES="sensor_msgs pcl_conversions pointcloud_to_laserscan"
-#ENV ROS_INSTALL_DIR="/opt/ros/${ROS_DISTRO}"
+ENV ROS_DISTRO="indigo" \
+    ROS_CONFIG="ros_comm" \
+    ROS_EXTRA_PACKAGES=""
+ENV ROS_INSTALL_DIR="/opt/ros/${ROS_DISTRO}"
 
 #RUN apt-get -qq update \
 #  && apt-get install -yq --no-install-recommends \
@@ -27,8 +27,8 @@ RUN git clone --recursive https://github.com/sunfounder/SunFounder_PiCar-S.git
 #COPY ./requirements.txt .
 #RUN pip install -q -r requirements.txt
 
-#RUN rosdep init \
-#    && rosdep update
+RUN rosdep init \
+    && rosdep update
 
 #RUN mkdir -p /usr/src/ros_${ROS_DISTRO}_ws/src ${ROS_INSTALL_DIR}
 
