@@ -59,6 +59,8 @@ WORKDIR /usr/src
 WORKDIR /usr/src/test
 COPY src test
 
+RUN source /opt/ros/kinetic/setup.bash
+
 RUN cd test && catkin_make  
 
 ## Clone, build, and install the Sweep C++ SDK
