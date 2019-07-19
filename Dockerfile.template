@@ -6,7 +6,7 @@ ENV INITSYSTEM="on" \
     PYTHONIOENCODING="UTF-8"
 
 # Variables for ROS distribution, configuration, and installation
-ENV ROS_DISTRO="indigo" \
+ENV ROS_DISTRO="kinetic" \
     ROS_CONFIG="ros_comm" \
     ROS_EXTRA_PACKAGES=""
 ENV ROS_INSTALL_DIR="/opt/ros/${ROS_DISTRO}"
