@@ -16,22 +16,22 @@ ENV ROS_INSTALL_DIR="/opt/ros/${ROS_DISTRO}"
 #    python-dev python-pip \
 #    libpcl-dev libpcl1.7
 
+RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu xenial main" > /etc/apt/sources.list.d/ros-latest.list'
+RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+
 RUN apt-get -qq update \
   && apt-get install -yq --no-install-recommends \
-    python-dev python-pip git
+    git \
+    python-dev \
+    python-pip \
+    ros-kinetic-ros-base
 
-
-RUN git clone --recursive https://github.com/sunfounder/SunFounder_PiCar-S.git
+#RUN git clone --recursive https://github.com/sunfounder/SunFounder_PiCar-S.git
 
 # Install ROS-related Python tools
 #COPY ./requirements.txt .
 #RUN pip install -q -r requirements.txt
 
-RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu xenial main" > /etc/apt/sources.list.d/ros-latest.list'
-RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
- 
-RUN apt-get update -qq && \
-  apt-get install -yq ros-kinetic-ros-base
 RUN rosdep init \
     && rosdep update
 
@@ -56,6 +56,8 @@ RUN rosdep init \
 #    && rm -rf src/*
 
 WORKDIR /usr/src
+WORKDIR /usr/src/test
+COPY src test
 
 RUN cd src && catkin_make  
 
