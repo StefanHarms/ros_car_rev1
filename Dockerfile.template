@@ -20,15 +20,16 @@ RUN apt-get -qq update --fix-missing\
     build-essential \
     git \
     python-dev \
-    python-pip 
+    python-pip \
+    ros-kinetic-ros-base
 
 # Install ROS-related Python tools via pip
 COPY ./requirements.txt .
 RUN pip install -q -r requirements.txt
 
-RUN apt-get -qq update --fix-missing\
-  && apt-get install -yq --no-install-recommends \
-    ros-kinetic-ros-base
+#RUN apt-get -qq update --fix-missing\
+#  && apt-get install -yq --no-install-recommends \
+    
 
 #RUN git clone --recursive https://github.com/sunfounder/SunFounder_PiCar-S.git
 
@@ -45,7 +46,7 @@ COPY test test
 RUN echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
 RUN chmod +x /opt/ros/kinetic/setup.bash
 RUN /opt/ros/kinetic/setup.bash 
-#RUN catkin_make  
+#RUN catkin_make
 
 
 # Clone and build Sweep ROS plus some additional ROS packages it depends on
