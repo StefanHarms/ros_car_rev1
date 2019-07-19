@@ -63,7 +63,7 @@ WORKDIR /usr/src
 WORKDIR /usr/src/test
 COPY src src
 
-RUN ls / -lah
+RUN ls /opt/ros/kinetic -lah
 RUN /opt/ros/kinetic/setup.bash 
 RUn catkin_make  
 
