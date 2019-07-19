@@ -10,11 +10,7 @@ ENV ROS_DISTRO="kinetic" \
     ROS_CONFIG="ros_comm" \
     ROS_EXTRA_PACKAGES=""
 ENV ROS_INSTALL_DIR="/opt/ros/${ROS_DISTRO}"
-
-#RUN apt-get -qq update \
-#  && apt-get install -yq --no-install-recommends \
-#    python-dev python-pip \
-#    libpcl-dev libpcl1.7
+ENV ROS_HOSTNAME="localhost"
 
 RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu xenial main" > /etc/apt/sources.list.d/ros-latest.list'
 RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
@@ -24,20 +20,17 @@ RUN apt-get -qq update --fix-missing\
     build-essential \
     git \
     python-dev \
-    python-pip \
-    ros-kinetic-ros-base 
+    python-pip 
 
-
-    #python-rosinstall \
-    #python-rosinstall-generator \
-    #python-wstool
-    
-
-#RUN git clone --recursive https://github.com/sunfounder/SunFounder_PiCar-S.git
-
-# Install ROS-related Python tools
+# Install ROS-related Python tools via pip
 COPY ./requirements.txt .
 RUN pip install -q -r requirements.txt
+
+RUN apt-get -qq update --fix-missing\
+  && apt-get install -yq --no-install-recommends \
+    ros-kinetic-ros-base
+
+#RUN git clone --recursive https://github.com/sunfounder/SunFounder_PiCar-S.git
 
 RUN rosdep init \
     && rosdep update
@@ -46,24 +39,7 @@ RUN rosdep init \
 
 #WORKDIR /usr/src/ros_${ROS_DISTRO}_ws
 
-#RUN rosinstall_generator ${ROS_CONFIG} ${ROS_EXTRA_PACKAGES} \
-#    --rosdistro ${ROS_DISTRO} --deps --tar > .rosinstall \
-#    && wstool init src .rosinstall \
-#    && rosdep install --from-paths src --ignore-src --rosdistro ${ROS_DISTRO} -y \
-#       --skip-keys python-rosdep \
-#       --skip-keys python-rospkg \
-#       --skip-keys python-catkin-pkg \
-#    && apt-get clean \
-#    && rm -rf /var/lib/apt/lists/* \
-#    && catkin init \
-#    && catkin config --install --install-space ${ROS_INSTALL_DIR} \
-#       --cmake-args -DCMAKE_BUILD_TYPE=Release \
-#    && catkin build --no-status --no-summary --no-notify \
-#    && catkin clean -y --logs --build --devel \
-#    && rm -rf src/*
-
 WORKDIR /usr/src
-WORKDIR /usr/src/test
 COPY test test
 
 RUN echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
@@ -71,19 +47,6 @@ RUN chmod +x /opt/ros/kinetic/setup.bash
 RUN /opt/ros/kinetic/setup.bash 
 #RUN catkin_make  
 
-## Clone, build, and install the Sweep C++ SDK
-#RUN git clone https://github.com/spmaniato/sweep-sdk.git \
-#      -b dashes_to_underscores \
-#      sweep_sdk \
-#  && cd sweep_sdk/libsweep \
-#  && mkdir -p build && cd build \
-#  && cmake .. -DCMAKE_BUILD_TYPE=Release \
-#  && cmake --build . \
-#  && cmake --build . --target install \
-#  && ldconfig \
-#  && cd /usr/src && rm -rf sweep_sdk
-
-#WORKDIR /usr/src/sweep_ws
 
 # Clone and build Sweep ROS plus some additional ROS packages it depends on
 # NOTE: Build with catkin_make here because they modify CMake variables ...
@@ -91,12 +54,7 @@ RUN /opt/ros/kinetic/setup.bash
 #  && /bin/bash -c "source ${ROS_INSTALL_DIR}/setup.bash && \
 #                   catkin_make -DCMAKE_BUILD_TYPE=Release"
 
-COPY . /usr/src/app
-
-WORKDIR /usr/src/app
-
 # Debugging .dockerignore
 RUN cat .dockerignore && ls -lah
 
 ENTRYPOINT ["./entrypoint.sh"]
-
